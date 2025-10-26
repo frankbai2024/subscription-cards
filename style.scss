@@ -1,0 +1,184 @@
+$gutter: 30px;
+$primary-font: "Poppins", sans-serif;
+$background-color: #fefefe;
+$clr-2: #6f69ac;
+$clr-3: #80ed99;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $primary-font;
+  background-color: $background-color;
+}
+
+.pricing {
+  padding: 100px 0;
+}
+
+.cards-wrapper {
+  display: flex; //水平排列
+  justify-content: center; //居中
+  max-width: 1440px;
+  margin: 0 auto;
+}
+//placeholder selector
+%price-card {
+  margin-right: $gutter;
+  &:last-child {
+    margin-right: 0;
+  }
+  border: 5px solid var(--clr);
+  padding: 40px 20px;
+  border-radius: 10px;
+  background-color: #fff;
+
+  .fa-check {
+    color: #57cc99;
+  }
+  .fa-times {
+    color: #ff0000;
+  }
+}
+
+.price-card.clr-1 {
+  @extend %price-card;
+  --clr: #ffb319;
+}
+.price-card.clr-2 {
+  @extend %price-card;
+  --clr: #{$clr-2};
+}
+.price-card.clr-3 {
+  @extend %price-card;
+  --clr: #{$clr-3};
+}
+
+.price-container {
+  width: 140px;
+  height: 140px;
+  background-color: var(--clr);
+  border-radius: 50%;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  justify-content: center; //水平居中
+  align-items: center; //交叉轴垂直方向居中
+  margin: 0 auto; //圆框水平居中
+  box-shadow: 0 0 0 5px #fff, 0 0 0 10px var(--clr); //圆框外阴影
+}
+.price {
+  display: flex;
+  span:first-child {
+    font-size: 30px;
+    // align-self: flex-start; //交叉轴顶部对齐
+  }
+  span:last-child {
+    font-size: 50px;
+  }
+}
+
+.plan {
+  margin: 30px 0;
+  text-transform: capitalize; //首字母大写
+  font-size: 30px;
+  color: #333;
+  text-align: center; //水平居中
+  position: relative;
+  //伪类
+  &::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: var(--clr);
+    position: absolute;
+    left: 0;
+    top: 50%; //垂直居中
+    transform: translateY(-50%); //向下放移一半高度
+  }
+  span {
+    background-color: #fff;
+    padding: 0 20px;
+    //以下两句让span盖住伪类
+    position: relative;
+    z-index: 1; //让span在伪类上面
+  }
+}
+
+.deliverables-wrapper {
+  list-style: none; //去掉默认的列表样式
+}
+
+.deliverable {
+  display: flex;
+  justify-content: space-between; //主轴两端对齐
+  align-items: center; //交叉轴垂直居中
+  font-size: 18px;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  span:first-child {
+    text-transform: capitalize; //首字母大写
+    color: #333;
+    margin-right: 15px;
+  }
+}
+
+.align-center {
+  text-align: center;
+}
+.btn {
+  display: inline-block;
+  margin-top: 45px;
+  padding: 10px 20px;
+  border: 3px solid var(--clr);
+  text-decoration: none;
+  font-size: 18px;
+  color: var(--clr);
+  border-radius: 100px;
+  transition: all 0.3s;
+  &:hover {
+    background-color: var(--clr);
+    color: #fff;
+  }
+}
+
+@media (max-width: 1200px) {
+  .cards-wrapper {
+    flex-wrap: wrap; //自动换行
+  }
+  .price-card {
+    width: calc(50% - $gutter);
+    &:nth-child(2) {
+      margin-right: 0;
+    }
+    &:last-child {
+      margin-top: $gutter;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-wrapper {
+    flex-direction: column; //控制主轴，垂直排列
+    align-items: center; //交叉轴水平居中
+    width: 90%;
+  }
+  .price-card {
+    width: 100%;
+    &:first-child {
+      margin-right: 0;
+    }
+    &:last-child {
+      margin-top: 0;
+    }
+    &:not(:last-child) {
+      margin-bottom: $gutter;
+    }
+  }
+}
